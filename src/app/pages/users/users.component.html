@@ -1,0 +1,61 @@
+<div class="mb-12 py-6 border-t border-b border-gray-200">
+  @if (users.length==0 && isLoading) {
+      <app-loader></app-loader>
+  }@else if (users.length==0 && !isLoading) {
+  <div class="text-center p-16 rounded-md ">
+    <div class="flex justify-center  mb-6">
+      <img src="https://cdn4.iconfinder.com/data/icons/cyber-security-part-1/46/user_issue-512.png"
+        alt="no users found" class="w-40 h-40" />
+    </div>
+    <h2 class="text-3xl font-bold text-gray-700 mb-2">no users found</h2>
+
+
+  </div>
+
+  }@else {
+ <div class="p-1 flex flex-wrap items-center justify-center">
+  @for (user of users; track $index) {
+
+ 
+    <div (click)="navigateToUserDetails(user.id)" class="flex-shrink-0 m-6 cursor-pointer relative overflow-hidden bg-purple-500 rounded-lg max-w-xs shadow-lg">
+      <svg class="absolute bottom-0 left-0 mb-8" viewBox="0 0 375 283" fill="none"
+        style="transform: scale(1.5); opacity: 0.1;">
+        <rect x="159.52" y="175" width="152" height="152" rx="8" transform="rotate(-45 159.52 175)" fill="white" />
+        <rect y="107.48" width="152" height="152" rx="8" transform="rotate(-45 0 107.48)" fill="white" />
+      </svg>
+      <div class=" pt-10 px-10 flex items-center rounded-full justify-center">
+        <img class="relative w-30  rounded-full" src={{user.avatar}} alt="">
+      </div>
+      <div class="relative text-white px-6 pb-6 mt-6">
+
+        <div class="flex justify-between">
+          <span class="block font-semibold text-lg">{{user.first_name }} {{user.last_name}} </span>
+          <span
+            class="block bg-white rounded-full text-purple-500 text-xs font-bold px-3 py-2 leading-none flex items-center">{{user.id}}</span>
+        </div>
+      </div>
+
+
+
+
+   
+
+
+
+  </div>
+
+  }
+
+</div>
+  }
+
+  @if(totalPages > 1 && users.length) {
+    <app-pagination
+      [currentPage]="+page"
+      [totalPages]="totalPages"
+      (pageChange)="onPageChanged($event)"
+    >
+    </app-pagination>
+    }
+
+</div> 
